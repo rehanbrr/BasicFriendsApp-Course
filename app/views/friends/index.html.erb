@@ -1,0 +1,37 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Friends</h1>
+
+You have <%= Friend.count %> friend(s)
+
+
+<table class="table table-hover">
+  <caption>List of friends</caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Twitter</th>
+      <th>User Id</th>
+      <th>Options</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @friends.each do |friend| %>
+    <% if current_user == friend.user%>
+    <tr>
+      <%= render friend %>
+      <td>
+          <%= link_to "Edit this friend", edit_friend_path(friend) %> |
+          <%= link_to "Show Friend", friend_path(friend)%> | 
+          <%= button_to "Destroy this friend", friend_path(friend), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+      </td>
+    <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Add New friend", new_friend_path, class: "btn btn-dark" %>
